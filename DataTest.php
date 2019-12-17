@@ -2,6 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
+require 'CsvFileIterator.php';
+
 class DataTest extends TestCase
 {
     /**
@@ -9,17 +11,12 @@ class DataTest extends TestCase
      */
     public function testAdd($a, $b, $expected)
     {
-        $this->assertSame($expected, $a + $b);
+        $this->assertSame((int)$expected, $a + $b);
     }
 
     public function additionProvider()
     {
-        return [
-            'adding zeros'  => [0, 0, 0],
-            'zero plus one' => [0, 1, 1],
-            'one plus zero' => [1, 0, 1],
-            'one plus one'  => [1, 1, 3],
-        ];
+        return new CsvFileIterator('data.csv');
     }
 
     public function additionProvider2()
